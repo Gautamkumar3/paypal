@@ -11,6 +11,7 @@ const sprintSchema = new mongoose.Schema({
     type: Date,
     required: [true, "End date field is required"],
   },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 });
 
 const Sprint = mongoose.model("sprint", sprintSchema);

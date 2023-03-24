@@ -17,6 +17,11 @@ const taskSchema = new mongoose.Schema({
     required: [true, "status field is required"],
     default: "todo",
   },
+  sprintId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "sprint",
+    required: true,
+  },
 });
 
 const Task = mongoose.model("task", taskSchema);
