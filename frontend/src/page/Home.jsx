@@ -5,8 +5,8 @@ import RightSidebar from "../components/RightSidebar";
 
 const Home = () => {
   return (
-    <Flex gap={10}>
-      <Box w="25%">
+    <Flex gap={10} mt="8%">
+      <Box w="25%" pos={"sticky"} top="200px">
         <LeftSidebar />
       </Box>
       <Box width={"70%"}>

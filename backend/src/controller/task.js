@@ -1,9 +1,9 @@
 const TaskModal = require("../modal/task");
 
 const getTask = async (req, res) => {
-  const { sprintId } = req.headers;
+  const { sprintid } = req.headers;
   try {
-    const Task = await TaskModal.find(sprintId);
+    const Task = await TaskModal.find({ sprintId: sprintid });
     res.status(200).send({
       status: "success",
       message: "Get all task related to this sprint",

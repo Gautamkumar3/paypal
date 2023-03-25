@@ -40,6 +40,7 @@ const userLogin = async (req, res) => {
       res.status(200).send({
         status: "success",
         message: "Login successfull",
+        userName: user.name,
         token: token,
       });
     }

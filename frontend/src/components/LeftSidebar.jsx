@@ -1,10 +1,18 @@
 import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getSprintData } from "../store/sprint/Sprint.action";
 import AllSprint from "./AllSprint";
-import RightSidebar from "./RightSidebar";
 
 const LeftSidebar = () => {
-  const arr = [1, 2, 3, 4, 5];
+  const dispatch = useDispatch();
+  const { data } = useSelector((store) => store.sprintData);
+
+  console.log(data);
+
+  useEffect(() => {
+    dispatch(getSprintData());
+  }, []);
 
   return (
     <Box>
@@ -14,11 +22,14 @@ const LeftSidebar = () => {
         rounded="md"
         bg="white"
         pos={"relative"}
-        h="90vh"
+        h="85vh"
+        overflow={"scroll"}
       >
-        <Heading>Sprint</Heading>
-        {arr.map((el) => (
-          <AllSprint key={el} name={el} />
+        <Heading my={5} textAlign="center" borderBottom={"2px solid black"}>
+          Sprint
+        </Heading>
+        {data?.map((el) => (
+          <AllSprint key={el._id} {...el} />
         ))}
         <Button
           colorScheme={"whatsapp"}
