@@ -4,6 +4,7 @@ const dbConnect = require("./config/db");
 const mongoose = require("mongoose");
 const userRouter = require("./route/user");
 const sprintRouter = require("./route/sprint");
+const taskRouter = require("./route/task");
 mongoose.set("strictQuery", true);
 require("dotenv").config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/user", userRouter);
 app.use("/sprint", sprintRouter);
+app.use("/tasks", taskRouter)
 
 app.get("/", (req, res) => {
   res.send("Welcome to paypal");

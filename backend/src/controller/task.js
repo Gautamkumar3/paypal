@@ -15,6 +15,7 @@ const getTask = async (req, res) => {
 };
 
 const addTask = async (req, res) => {
+  const { title } = req.body;
   try {
     const checkTask = await TaskModal.findOne({ title });
     if (checkTask) {
@@ -25,7 +26,7 @@ const addTask = async (req, res) => {
     } else {
       const Task = new TaskModal({
         ...req.body,
-        sprintId: req.headers.sprintId,
+        sprintId: req.headers.sprintid,
       });
       await Task.save();
       res.status(200).send({
@@ -53,13 +54,27 @@ const deleteTask = async (req, res) => {
   }
 };
 
-
-const updateTask = async (req, res)=>{
-    
-}
+const updateTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const Task = await TaskModal.findByIdAndUpdate(
+      id,
+      { status: req.body.status },
+      { new: true }
+    );
+    res.status(200).send({
+      status: "success",
+      message: "Task updated successfully",
+      data: Task,
+    });
+  } catch (er) {
+    res.status(401).send({ status: "error", message: er.message });
+  }
+};
 
 module.exports = {
   getTask,
   addTask,
   deleteTask,
+  updateTask,
 };
