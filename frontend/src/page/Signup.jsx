@@ -22,7 +22,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:8080/user/signup", data)
+      .post("https://paypal-api.onrender.com/user/signup", data)
       .then((res) => {
         console.log(res.data);
         toast({

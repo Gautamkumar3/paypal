@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSprintData } from "../store/sprint/Sprint.action";
 import AllSprint from "./AllSprint";
+import CreateSprintModal from "./CreateSprintModal";
 
 const LeftSidebar = () => {
   const dispatch = useDispatch();
@@ -16,29 +17,23 @@ const LeftSidebar = () => {
 
   return (
     <Box>
+      <Heading textAlign="center" borderBottom={"2px solid black"}>
+        Sprint
+      </Heading>
       <Box
         boxShadow="md"
         p="6"
         rounded="md"
         bg="white"
-        pos={"relative"}
-        h="85vh"
+        h="70vh"
         overflow={"scroll"}
       >
-        <Heading my={5} textAlign="center" borderBottom={"2px solid black"}>
-          Sprint
-        </Heading>
         {data?.map((el) => (
           <AllSprint key={el._id} {...el} />
         ))}
-        <Button
-          colorScheme={"whatsapp"}
-          pos="absolute"
-          w={"85%"}
-          bottom={"10px"}
-        >
-          Create Sprint
-        </Button>
+      </Box>
+      <Box w={"80%"}>
+        <CreateSprintModal />
       </Box>
     </Box>
   );
