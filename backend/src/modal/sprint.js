@@ -6,10 +6,22 @@ const sprintSchema = new mongoose.Schema({
   start_date: {
     type: Date,
     required: [true, "Start date field is required"],
+    validate: {
+      validator: function (value) {
+        return value < this.end_date;
+      },
+      message: "Start date must be less than end date",
+    },
   },
   end_date: {
     type: Date,
     required: [true, "End date field is required"],
+    validate: {
+      validator: function (value) {
+        return value > this.start_date;
+      },
+      message: "End date must be greater than start date",
+    },
   },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 });

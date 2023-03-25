@@ -5,12 +5,14 @@ const {
   updateSprint,
   deleteSprint,
 } = require("../controller/sprint");
+const AuthMiddleware = require("../middleware/AuthMiddleware");
 
 const sprintRouter = express.Router();
+sprintRouter.use(AuthMiddleware);
 
 sprintRouter.get("/", getAllSprint);
 sprintRouter.post("/", addSprint);
 sprintRouter.patch("/:id", updateSprint);
-sprintRouter.get("/:id", deleteSprint);
+sprintRouter.delete("/:id", deleteSprint);
 
 module.exports = sprintRouter;

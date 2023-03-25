@@ -1,17 +1,17 @@
 const SprintModal = require("../modal/sprint");
 
 const addSprint = async (req, res) => {
-  const { name } = req.body;
+  const { title } = req.body;
 
   try {
-    const checkSprint = await SprintModal.findOne({ name });
+    const checkSprint = await SprintModal.findOne({ title });
     if (checkSprint) {
       res.status(400).send({
         status: "warning",
         message: "This sprint is already exist create another one",
       });
     } else {
-      const Sprint = new SprintModal({ ...req.body });
+      const Sprint = new SprintModal({ ...req.body, userId: req.userId });
       await Sprint.save();
       res.status(200).send({
         status: "success",
