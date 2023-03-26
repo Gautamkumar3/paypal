@@ -19,11 +19,11 @@ import {
 const api = "https://paypal-api.onrender.com";
 const userdata = JSON.parse(localStorage.getItem("userdata"));
 
-export const getSprintData = () => async (dispatch) => {
+export const getSprintData = (token) => async (dispatch) => {
   dispatch({ type: GET_SPRINT_LOADING });
   try {
     const res = await axios.get(`${api}/sprint`, {
-      headers: { token: userdata.token },
+      headers: { token: token },
     });
     dispatch({
       type: GET_SPRINT_SUCCESS,

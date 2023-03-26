@@ -18,6 +18,7 @@ import { EditIcon } from "@chakra-ui/icons";
 
 const UpdateSprintModal = ({ id }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const userdata = JSON.parse(localStorage.getItem("userdata"));
 
   const [data, setData] = useState({
     title: "",
@@ -39,7 +40,7 @@ const UpdateSprintModal = ({ id }) => {
     dispatch(updateSprintData(id, data))
       .then((res) => {
         if (res.data.status === "success") {
-          dispatch(getSprintData());
+          dispatch(getSprintData(userdata?.token));
           toast({
             title: "Sprint update successfully",
             status: "success",

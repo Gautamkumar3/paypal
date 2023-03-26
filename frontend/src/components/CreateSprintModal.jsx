@@ -17,6 +17,7 @@ import { addSprintData, getSprintData } from "../store/sprint/Sprint.action";
 
 const CreateSprintModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const userdata = JSON.parse(localStorage.getItem("userdata"));
 
   const [data, setData] = useState({
     title: "",
@@ -38,7 +39,7 @@ const CreateSprintModal = () => {
     dispatch(addSprintData(data))
       .then((res) => {
         if (res.data.status === "success") {
-          dispatch(getSprintData());
+          dispatch(getSprintData(userdata.token));
           toast({
             title: "Sprint create successfully",
             status: "success",

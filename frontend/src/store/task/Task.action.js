@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  ADD_SPRINT_SUCCESS,
-  UPDATE_SPRINT_ERROR,
-} from "../sprint/Sprint.types";
+
 import {
   ADD_TASK_ERROR,
   ADD_TASK_LOADING,
@@ -85,6 +82,6 @@ export const updateTaskData = (sprintId, id, data) => async (dispatch) => {
 
     return res;
   } catch (er) {
-    return dispatch({ type: UPDATE_SPRINT_ERROR });
+    return dispatch({ type: UPDATE_TASK_ERROR });
   }
 };

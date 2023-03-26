@@ -7,10 +7,12 @@ import { getSprintData } from "../store/sprint/Sprint.action";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const userdata = JSON.parse(localStorage.getItem("userdata"));
   useEffect(() => {
-    dispatch(getSprintData());
+    dispatch(getSprintData(userdata?.token));
     localStorage.removeItem("sprintId");
   }, []);
+
   return (
     <Flex gap={10} mt="8%">
       <Box w="25%" pos={"sticky"} top="200px">

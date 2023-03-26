@@ -1,5 +1,13 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Badge, Box, Flex, Heading, HStack, Text, useToast } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSprintData, getSprintData } from "../store/sprint/Sprint.action";
@@ -9,7 +17,8 @@ import UpdateSprintModal from "./UpdateSprintModal";
 const AllSprint = ({ _id, title, goal, end_date, start_date }) => {
   const dispatch = useDispatch();
   const toast = useToast();
-  
+  const userdata = JSON.parse(localStorage.getItem("userdata"));
+
   const handleTask = (id) => {
     dispatch(getTaskData(id));
     localStorage.setItem("sprintId", id);
@@ -19,7 +28,7 @@ const AllSprint = ({ _id, title, goal, end_date, start_date }) => {
     dispatch(deleteSprintData(id))
       .then((res) => {
         if (res.data.status === "success") {
-          dispatch(getSprintData());
+          dispatch(getSprintData(userdata.token));
           toast({
             title: "Sprint deleted successfully",
             status: "success",
@@ -47,8 +56,6 @@ const AllSprint = ({ _id, title, goal, end_date, start_date }) => {
         });
       });
   };
-
-
 
   return (
     <Box

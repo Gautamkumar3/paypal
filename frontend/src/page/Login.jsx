@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
-
+import { getSprintData } from "../store/sprint/Sprint.action";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -21,7 +22,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
     await axios
       .post("https://paypal-api.onrender.com/user/login", data)
       .then((res) => {
@@ -32,7 +32,6 @@ const Login = () => {
             token: res.data.token,
           })
         );
-        console.log(res.data);
         toast({
           title: "Login successfull",
           status: "success",
